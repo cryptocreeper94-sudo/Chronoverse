@@ -902,6 +902,32 @@
     }
 
   </style>
+  <!-- UNIVERSAL PWA BACK-BUTTON PATCH -->
+  <script>
+    window.addEventListener('load', function() {
+      if (window.history && window.history.pushState) {
+        window.history.pushState({ pwa: true }, '');
+        window.addEventListener('popstate', function(e) {
+          // 1. Dispatch Escape to close React/Radix/shadcn modals natively
+          window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', keyCode: 27, which: 27 }));
+          
+          // 2. Fallback: Force click any generic close buttons in the DOM
+          const modals = document.querySelectorAll('.modal, [role="dialog"], .overlay, .popup, [data-state="open"]');
+          let closed = false;
+          modals.forEach(m => {
+            const btn = m.querySelector('button.close, [aria-label="Close"], .close-button, [data-dismiss="modal"]');
+            if (btn && typeof btn.click === 'function') {
+              btn.click();
+              closed = true;
+            }
+          });
+          
+          // 3. Keep the user in the app by pushing state again
+          window.history.pushState({ pwa: true }, '');
+        });
+      }
+    });
+  </script>
 </head>
 <body>
 
@@ -3552,24 +3578,24 @@
 
     // ── Achievement Certificates ──
     function generateCertificate(playerName, achievement, date) {
-      var certHtml = '<!DOCTYPE html><html><head><title>Chronoverse Certificate</title></head><body style="margin:0;padding:40px;background:#0a0a1a;display:flex;justify-content:center;align-items:center;min-height:100vh;">' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:4px solid #fbbf24;border-radius:20px;padding:60px;max-width:600px;text-align:center;box-shadow:0 0 60px rgba(251,191,36,0.2);">' +
-        '<div style="font-size:48px;margin-bottom:10px;">\uD83C\uDFC6</div>' +
-        '<div style="color:#fbbf24;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:4px;margin-bottom:20px;">Certificate of Achievement</div>' +
-        '<div style="color:#22d3ee;font-size:32px;font-weight:900;margin-bottom:10px;">THE CHRONOVERSE</div>' +
-        '<div style="color:#e2e8f0;font-size:14px;margin-bottom:30px;">This certifies that</div>' +
-        '<div style="color:#fbbf24;font-size:28px;font-weight:900;margin-bottom:20px;">' + playerName + '</div>' +
-        '<div style="color:#94a3b8;font-size:16px;line-height:1.8;margin-bottom:30px;">' + achievement + '</div>' +
-        '<div style="color:#64748b;font-size:12px;">' + (date || new Date().toLocaleDateString()) + '</div>' +
-        '<div style="margin-top:30px;color:#475569;font-size:11px;">DarkWave Studios \u00B7 chronoverse.tlid.io</div>' +
-        '</div>
+      var certHtml = `<!DOCTYPE html><html><head><title>Chronoverse Certificate</title></head><body style="margin:0;padding:40px;background:#0a0a1a;display:flex;justify-content:center;align-items:center;min-height:100vh;">
+        <div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:4px solid #fbbf24;border-radius:20px;padding:60px;max-width:600px;text-align:center;box-shadow:0 0 60px rgba(251,191,36,0.2);">
+        <div style="font-size:48px;margin-bottom:10px;">\uD83C\uDFC6</div>
+        <div style="color:#fbbf24;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:4px;margin-bottom:20px;">Certificate of Achievement</div>
+        <div style="color:#22d3ee;font-size:32px;font-weight:900;margin-bottom:10px;">THE CHRONOVERSE</div>
+        <div style="color:#e2e8f0;font-size:14px;margin-bottom:30px;">This certifies that</div>
+        <div style="color:#fbbf24;font-size:28px;font-weight:900;margin-bottom:20px;">${playerName}</div>
+        <div style="color:#94a3b8;font-size:16px;line-height:1.8;margin-bottom:30px;">${achievement}</div>
+        <div style="color:#64748b;font-size:12px;">${date || new Date().toLocaleDateString()}</div>
+        <div style="margin-top:30px;color:#475569;font-size:11px;">DarkWave Studios \u00B7 chronoverse.tlid.io</div>
+        </div>
 
 <!-- Protected by Lume-V -->
 <a href="https://lume-lang.org" target="_blank" rel="noopener" id="lume-badge" style="position:fixed;bottom:12px;right:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(2,6,23,0.88);border:1px solid rgba(16,185,129,0.3);border-radius:20px;color:#10b981;font-size:11px;font-weight:700;text-decoration:none;z-index:9999;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all 0.3s;font-family:Inter,system-ui,sans-serif;letter-spacing:0.02em;box-shadow:0 2px 12px rgba(0,0,0,0.3);">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
   Protected by Lume-V
 </a>
-</body></html>';
+</body></html>`;
 
       var win = window.open('', '_blank');
       if (win) { win.document.write(certHtml); win.document.close(); }
