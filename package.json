@@ -1,6 +1,6 @@
 {
   "name": "chronoverse",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Chronoverse - Educational Superhero Portal",
   "main": "main.js",
   "scripts": {
@@ -36,6 +36,18 @@
   "dependencies": {
     "@capacitor/android": "^8.3.4",
     "@capacitor/cli": "^8.3.4",
-    "@capacitor/core": "^8.3.4"
-  }
+    "@capacitor/core": "^8.3.4",
+    "express": "^5.2.1",
+    "puppeteer": "^25.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptocreeper94-sudo/chronoverse.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cryptocreeper94-sudo/chronoverse/issues"
+  },
+  "homepage": "https://github.com/cryptocreeper94-sudo/chronoverse#readme"
 }
