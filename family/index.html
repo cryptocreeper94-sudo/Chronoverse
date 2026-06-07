@@ -493,14 +493,14 @@
       <!-- Welcome -->
       <div class="welcome-section">
         <h1 id="welcome-heading">Welcome back!</h1>
-        <p>Here's what's happening in your kids' Chronoverse</p>
+        <p>Here's what's happening in your children's Chronoverse</p>
       </div>
 
       <!-- Stats Overview -->
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-value" id="stat-kids">0</div>
-          <div class="stat-label">Kids</div>
+          <div class="stat-label">Children</div>
         </div>
         <div class="stat-card">
           <div class="stat-value" id="stat-levels">0</div>
@@ -514,16 +514,16 @@
 
       <!-- Kid Profiles -->
       <div class="section-header">
-        <h2>Your Kids</h2>
-        <button onclick="openAddKidModal()">+ Add Kid</button>
+        <h2>Your Children</h2>
+        <button onclick="openAddKidModal()">+ Add Child</button>
       </div>
       <div class="kid-cards" id="kid-cards">
         <!-- Populated by JS -->
         <div class="empty-state" id="empty-state">
           <div class="empty-icon">👶</div>
-          <h3>No kids yet!</h3>
+          <h3>No children yet!</h3>
           <p>Add your child's profile to get started. They'll get their own personalized portal at <strong>username.tlid.io</strong></p>
-          <button onclick="openAddKidModal()">+ Add First Kid</button>
+          <button onclick="openAddKidModal()">+ Add First Child</button>
         </div>
       </div>
 
@@ -535,7 +535,7 @@
         <div id="activity-feed">
           <div class="activity-item">
             <div class="activity-icon" style="background:var(--accent-solid);">🎮</div>
-            <div class="activity-text">Activity will appear here once your kids start playing</div>
+            <div class="activity-text">Activity will appear here once your children start playing</div>
             <div class="activity-time">—</div>
           </div>
         </div>
@@ -555,16 +555,16 @@
   <div id="add-kid-modal" class="modal-overlay" onclick="if(event.target===this)closeAddKidModal()">
     <div class="modal-content" style="position:relative;">
       <button class="modal-close" onclick="closeAddKidModal()">✕</button>
-      <h3>Add a Kid</h3>
+      <h3>Add a Child</h3>
 
       <div class="form-group">
-        <label>Kid's Name</label>
+        <label>Child's Name</label>
         <input type="text" class="form-input" id="kid-name" placeholder="What's their name?" oninput="generateUsername()" />
       </div>
 
       <div class="form-group">
-        <label>Username (their portal URL)</label>
-        <input type="text" class="form-input" id="kid-username" placeholder="Choose a unique username" oninput="checkUsername()" maxlength="20" />
+        <label>Portal URL (must be globally unique)</label>
+        <input type="text" class="form-input" id="kid-username" placeholder="unique-portal-name (e.g. jason-hero)" oninput="checkUsername()" maxlength="20" />
         <div class="username-status" id="username-status"></div>
       </div>
 

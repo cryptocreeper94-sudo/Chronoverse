@@ -11,6 +11,7 @@ async function buildAndroidWebDir() {
   console.log('Copying assets to dist_android...');
   const filesToCopy = [
     'index.html',
+    'family',
     'src',
     'assets'
   ];
