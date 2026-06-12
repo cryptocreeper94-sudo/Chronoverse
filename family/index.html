@@ -444,9 +444,15 @@
       </div>
 
       <div id="signup-form" style="display:none;">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" class="form-input" id="signup-name" placeholder="Your name" />
+        <div style="display:flex; gap:10px;">
+          <div class="form-group" style="flex:1;">
+            <label>First Name</label>
+            <input type="text" class="form-input" id="signup-first" placeholder="First name" />
+          </div>
+          <div class="form-group" style="flex:1;">
+            <label>Last Name</label>
+            <input type="text" class="form-input" id="signup-last" placeholder="Last name" />
+          </div>
         </div>
         <div class="form-group">
           <label>Email</label>
@@ -644,17 +650,21 @@
 
     // ── Signup ──
     async function handleSignup() {
-      const name = document.getElementById('signup-name').value.trim();
+      const first = document.getElementById('signup-first').value.trim();
+      const last = document.getElementById('signup-last').value.trim();
       const email = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value;
-      if (!name || !email || !password) return showAuthError('Please fill in all fields.');
+      if (!first || !last || !email || !password) return showAuthError('Please fill in all fields.');
       if (password.length < 6) return showAuthError('Password must be at least 6 characters.');
+      const fullName = first + ' ' + last;
       try {
         const cred = await auth.createUserWithEmailAndPassword(email, password);
-        await cred.user.updateProfile({ displayName: name });
+        await cred.user.updateProfile({ displayName: fullName });
         // Create parent doc in Firestore
         await db.collection('parents').doc(cred.user.uid).set({
-          displayName: name,
+          displayName: fullName,
+          firstName: first,
+          familyName: last,
           email: email,
           kids: [],
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -672,8 +682,14 @@
         // Check if parent doc exists, create if not
         const doc = await db.collection('parents').doc(result.user.uid).get();
         if (!doc.exists) {
+          const gName = result.user.displayName || 'Parent';
+          const gParts = gName.split(' ');
+          const gFirst = gParts[0];
+          const gLast = gParts.length > 1 ? gParts.slice(1).join(' ') : '';
           await db.collection('parents').doc(result.user.uid).set({
-            displayName: result.user.displayName || 'Parent',
+            displayName: gName,
+            firstName: gFirst,
+            familyName: gLast,
             email: result.user.email,
             kids: [],
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -692,8 +708,10 @@
     // ── Load Dashboard ──
     async function loadParentDashboard() {
       const name = currentUser.displayName || 'Parent';
+      const firstName = name.split(' ')[0];
       document.getElementById('topbar-name').textContent = name;
-      document.getElementById('welcome-heading').textContent = `Welcome, ${name.split(' ')[0]}!`;
+      // Will be updated with family name from Firestore below
+      document.getElementById('welcome-heading').textContent = `Welcome, ${firstName}!`;
 
       // Load parent doc
       try {
@@ -702,7 +720,10 @@
           parentData = doc.data();
         } else {
           // Create parent doc if it doesn't exist
-          parentData = { displayName: name, email: currentUser.email, kids: [] };
+          // Try to extract last name from displayName
+          const nameParts = name.split(' ');
+          const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+          parentData = { displayName: name, firstName: firstName, familyName: lastName, email: currentUser.email, kids: [] };
           await db.collection('parents').doc(currentUser.uid).set({
             ...parentData,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -711,6 +732,12 @@
       } catch (e) {
         parentData = { kids: [] };
         console.log('Firestore read error:', e);
+      }
+
+      // Update welcome with family name
+      const familyName = parentData.familyName || name.split(' ').slice(1).join(' ') || '';
+      if (familyName) {
+        document.getElementById('welcome-heading').textContent = `Welcome, ${familyName} Family!`;
       }
 
       renderKidCards();
