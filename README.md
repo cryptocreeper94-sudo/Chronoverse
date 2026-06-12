@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Version-1.0.0-fbbf24?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Web-fbbf24?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Android%20%7C%20Web-fbbf24?style=for-the-badge" />
   <img src="https://img.shields.io/badge/100%25%20Free-No%20Ads-10b981?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Ages-6--9-ec4899?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Offline-Capable-8b5cf6?style=for-the-badge" />
@@ -14,7 +14,7 @@ Screen time that builds cognitive skills. Inspired by Geometry Dash's addictive 
 
 A philanthropic initiative by **Lume42 Labs**, **Academy.tlid.io**, and **DarkWave Studios LLC**.
 
-> **Play Now:** [chronoverse.tlid.io](https://chronoverse.tlid.io) · **Desktop:** [Download for Windows](https://github.com/cryptocreeper94-sudo/Aidens-World/releases/download/v1.0.0/The.Chronoverse.Setup.1.0.0.exe)
+> **Play Now:** [chronoverse.tlid.io](https://chronoverse.tlid.io) · **Desktop:** [Download for Windows](https://github.com/cryptocreeper94-sudo/Chronoverse/releases/download/v1.0.0/The.Chronoverse.Setup.1.0.0.exe) · **Mobile:** [Download APK](https://github.com/cryptocreeper94-sudo/Chronoverse/releases/download/v1.0.0/chronoverse-v1.0.0.apk)
 
 ---
 
@@ -22,10 +22,10 @@ A philanthropic initiative by **Lume42 Labs**, **Academy.tlid.io**, and **DarkWa
 
 | Platform | Download | Size |
 |----------|----------|------|
-| 🖥️ **Windows 10/11** | [The Chronoverse Setup 1.0.0.exe](https://github.com/cryptocreeper94-sudo/Aidens-World/releases/download/v1.0.0/The.Chronoverse.Setup.1.0.0.exe) | ~252 MB |
+| 🖥️ **Windows 10/11** | [The Chronoverse Setup 1.0.0.exe](https://github.com/cryptocreeper94-sudo/Chronoverse/releases/download/v1.0.0/The.Chronoverse.Setup.1.0.0.exe) | ~423 MB |
+| 📱 **Android** | [chronoverse-v1.0.0.apk](https://github.com/cryptocreeper94-sudo/Chronoverse/releases/download/v1.0.0/chronoverse-v1.0.0.apk) | ~80 MB |
 | 🌐 **Web (any device)** | [chronoverse.tlid.io](https://chronoverse.tlid.io) | — |
-
-> 📱 Mobile apps coming soon — the web version already works on phones and tablets
+| 👨‍👩‍👧‍👦 **Family Portal** | [family.tlid.io](https://family.tlid.io) | — |
 
 ---
 
@@ -99,14 +99,31 @@ Holographic character cards with animated foil effects and stat breakdowns:
 
 ---
 
-## 🔓 Rift Locker
+## 🔓 Rift Locker & Economy
 
-The in-game cosmetics system:
+Two-currency system — both earned through gameplay, **never purchasable with real money**:
 
-- Earn **Lumes ✦** through achievements, level completion, and boss defeats
-- Unlock hero suits, villain skins, and bonus characters
-- 4 free base suits available immediately
-- No real money involved — ever
+### ✦ Lumes — Store Currency
+Earned through achievements, level completion, and boss defeats. Spend in the Rift Locker:
+
+| Category | Items | Price Range |
+|----------|-------|-------------|
+| 🦸 Hero Suits | 8 suits (4 free + 4 unlockable) | 0–20 ✦ |
+| 😈 Villain Skins | 3 villain costumes | 30–50 ✦ |
+| 🖼️ Wallpapers | 8 portal backgrounds (Nebula, Ocean, Lava, Forest, Arctic, Sunset, Galaxy, Rainbow) | 5–15 ✦ |
+| ✨ Trails & Effects | 8 gameplay trails (Fire, Ice, Rainbow, Lightning, Hearts, Stars, Shadow, Pixel) | 8–20 ✦ |
+| 👨‍👧 Family Goodies | 8 items (certificates, avatar frames, portal music, badges) | 5–15 ✦ |
+
+### 💎 Shards — Power Currency
+Collected during gameplay in Rift Invaders, Vault Defender, and Chrono Match. Spend on Rift Powers:
+
+| Power | Cost | Effect |
+|-------|------|--------|
+| 🛡️ Rift Shield | 10 💎 | 5 seconds of invincibility |
+| 🧲 Magnet Pull | 15 💎 | Auto-collect nearby shards |
+| ⏳ Time Fracture | 20 💎 | 6 seconds of slow motion |
+| 🦘 Double Jump | 25 💎 | Jump again mid-air |
+| ⚡ Dimensional Blast | 30 💎 | Destroy all enemies on screen |
 
 ---
 
