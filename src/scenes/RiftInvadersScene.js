@@ -1081,12 +1081,16 @@ class RiftInvadersScene extends Phaser.Scene {
     exit.on('pointerover', () => exit.setScale(1.05));
     exit.on('pointerout', () => exit.setScale(1));
     exit.on('pointerdown', () => {
-      if (window.riftInvadersGame) {
-        window.riftInvadersGame.destroy(true);
-        window.riftInvadersGame = null;
+      if (typeof window.goBackToPortal === 'function') {
+        window.goBackToPortal();
+      } else {
+        if (window.riftInvadersGame) {
+          window.riftInvadersGame.destroy(true);
+          window.riftInvadersGame = null;
+        }
+        document.getElementById('game-container-invaders').style.display = 'none';
+        document.getElementById('aiden-portal').style.display = 'block';
       }
-      document.getElementById('game-container-invaders').style.display = 'none';
-      document.getElementById('aiden-portal').style.display = 'block';
     });
   }
 

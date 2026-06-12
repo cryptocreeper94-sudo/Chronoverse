@@ -84,6 +84,8 @@ window.launchRiftInvaders = function() {
   if (playHub) playHub.style.display = 'none';
   const gameHub = document.getElementById('game-hub');
   if (gameHub) { gameHub.style.display = 'none'; gameHub.style.opacity = '0'; }
+  const learningCenter = document.getElementById('learning-center');
+  if (learningCenter) learningCenter.style.display = 'none';
 
   // Enter game mode (fullscreen + landscape)
   document.body.classList.add('playing-game');

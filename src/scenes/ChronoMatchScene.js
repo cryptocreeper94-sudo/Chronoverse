@@ -98,12 +98,16 @@ class ChronoMatchScene extends Phaser.Scene {
       padding: { x: 10, y: 5 }
     }).setDepth(100).setInteractive({ useHandCursor: true });
     exitBtn.on('pointerdown', () => {
-      if (window.chronoMatchGame) {
-        window.chronoMatchGame.destroy(true);
-        window.chronoMatchGame = null;
+      if (typeof window.goBackToPortal === 'function') {
+        window.goBackToPortal();
+      } else {
+        if (window.chronoMatchGame) {
+          window.chronoMatchGame.destroy(true);
+          window.chronoMatchGame = null;
+        }
+        document.getElementById('game-container-match').style.display = 'none';
+        document.getElementById('aiden-portal').style.display = 'block';
       }
-      document.getElementById('game-container-match').style.display = 'none';
-      document.getElementById('aiden-portal').style.display = 'block';
     });
 
     // ── Timer ──
@@ -367,12 +371,16 @@ class ChronoMatchScene extends Phaser.Scene {
       padding: { x: 15, y: 6 }
     }).setOrigin(0.5).setDepth(201).setInteractive({ useHandCursor: true });
     exit.on('pointerdown', () => {
-      if (window.chronoMatchGame) {
-        window.chronoMatchGame.destroy(true);
-        window.chronoMatchGame = null;
+      if (typeof window.goBackToPortal === 'function') {
+        window.goBackToPortal();
+      } else {
+        if (window.chronoMatchGame) {
+          window.chronoMatchGame.destroy(true);
+          window.chronoMatchGame = null;
+        }
+        document.getElementById('game-container-match').style.display = 'none';
+        document.getElementById('aiden-portal').style.display = 'block';
       }
-      document.getElementById('game-container-match').style.display = 'none';
-      document.getElementById('aiden-portal').style.display = 'block';
     });
   }
 

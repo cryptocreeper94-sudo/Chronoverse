@@ -13,6 +13,7 @@
   "author": "DarkWave Ecosystem",
   "license": "UNLICENSED",
   "build": {
+    "nsis": { "oneClick": false, "runAfterFinish": false, "allowElevation": true, "createDesktopShortcut": true, "createStartMenuShortcut": true },
     "appId": "io.tlid.chronoverse",
     "productName": "The Chronoverse",
     "directories": {

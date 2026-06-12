@@ -651,33 +651,48 @@
       gap: 20px;
     }
     .app-card {
-      background: rgba(20, 22, 50, 0.85);
-      border: 4px solid #2a2b4a;
+      background: linear-gradient(145deg, rgba(30, 35, 80, 0.95), rgba(15, 18, 45, 0.95));
+      border: 3px solid rgba(100, 120, 255, 0.4);
       border-radius: 24px;
-      padding: 16px;
+      padding: 18px;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    .app-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 21px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+      pointer-events: none;
     }
     .app-card:hover {
       transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 30px var(--card-glow, rgba(34,211,238,0.3));
     }
     .app-card:active {
       transform: scale(0.92);
     }
     .app-card.playable {
-      border-color: #22d3ee;
-      box-shadow: 0 8px 30px rgba(34, 211, 238, 0.4);
+      animation: cardPulse 3s ease-in-out infinite;
+    }
+    @keyframes cardPulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.15); }
     }
     .app-card.locked {
       border-color: #475569;
       opacity: 0.7;
       cursor: not-allowed;
+      animation: none;
     }
     .app-card.locked:hover {
       transform: none;
@@ -686,11 +701,11 @@
       width: 100%;
       aspect-ratio: 1;
       border-radius: 16px;
-      background: #0a0a1a;
+      background: linear-gradient(135deg, #0a0a2a, #151540);
       margin-bottom: 16px;
       object-fit: cover;
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      border: 2px solid rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.15);
     }
     .app-title {
       font-size: 18px;
@@ -701,7 +716,7 @@
     }
     .app-desc {
       font-size: 13px;
-      color: #cbd5e1;
+      color: #e2e8f0;
       font-weight: 700;
     }
 
@@ -1211,6 +1226,10 @@
         <span style="font-size:20px;">✦</span>
         <span id="portal-lume-balance" style="color:#a855f7; font-weight:900; font-size:18px;">0</span>
         <span style="color:#94a3b8; font-size:13px; font-weight:bold;">LUMES</span>
+        <span style="color:#334155; margin:0 4px;">·</span>
+        <span style="font-size:16px;">💎</span>
+        <span id="portal-shard-balance" style="color:#22d3ee; font-weight:900; font-size:18px;">0</span>
+        <span style="color:#94a3b8; font-size:13px; font-weight:bold;">SHARDS</span>
       </div>
     </div>
 
@@ -1618,17 +1637,17 @@
           </div>
         </button>
         
-        <!-- Vault Defender (Coming Soon) -->
-        <div style="flex: 0 0 320px; scroll-snap-align: center; background: rgba(251, 191, 36, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; opacity: 0.8; cursor: not-allowed; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-          <div style="position: relative;">
-            <img src="assets/ui/vault_defender_thumb.png" alt="Vault Defender" style="width: 100%; height: 200px; object-fit: cover; filter: grayscale(50%);" />
-            <div style="position: absolute; top: 15px; right: 15px; background: #fbbf24; color: #000; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; text-transform: uppercase; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">Coming Soon</div>
+        <!-- Vault Defender (Playable!) -->
+        <button onclick="showVaultDefender()" style="flex: 0 0 320px; scroll-snap-align: center; background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(251,191,36,0.02)); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 2px solid rgba(251,191,36,0.5); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s ease; text-align: left; box-shadow: 0 0 20px rgba(251,191,36,0.15), 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(251,191,36,0.1);">
+          <div style="width:100%; height:200px; background:linear-gradient(135deg, #1a0a00 0%, #2d1800 50%, #0a0800 100%); display:flex; align-items:center; justify-content:center; font-size:80px; position:relative; overflow:hidden; border-bottom: 2px solid rgba(251,191,36,0.3);">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 80%, rgba(251,191,36,0.25), transparent 60%);"></div>
+            🛡️
           </div>
           <div style="padding: 24px;">
-            <div style="color:#fbbf24; font-size:24px; font-weight: 800; margin-bottom: 8px;">Vault Defender</div>
-            <div style="color:#cbd5e1; font-size:15px; line-height: 1.5;">Defend the mainframe against endless waves. Tactical tower defense and grid combat.</div>
+            <div style="color:#fbbf24; font-size:24px; font-weight: 800; margin-bottom: 8px; text-shadow: 0 0 10px rgba(251,191,36,0.5);">🛡️ Vault Defender</div>
+            <div style="color:#cbd5e1; font-size:15px; line-height: 1.5;">Defend the vault! Tap enemies before they break in. 9 doors, 60 seconds, how many can you zap?</div>
           </div>
-        </div>
+        </button>
 
         <!-- Logic Puzzles (Coming Soon) -->
         <div style="flex: 0 0 320px; scroll-snap-align: center; background: rgba(139, 92, 246, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; opacity: 0.8; cursor: not-allowed; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
@@ -1918,16 +1937,39 @@
         <span style="font-size:20px;">✦</span>
         <span id="locker-lume-balance" style="color:#a855f7; font-weight:900; font-size:22px;">0</span>
         <span style="color:#94a3b8; font-size:14px; font-weight:bold;">LUMES</span>
+        <span style="color:#334155; margin:0 6px;">·</span>
+        <span style="font-size:18px;">💎</span>
+        <span id="locker-shard-balance" style="color:#22d3ee; font-weight:900; font-size:22px;">0</span>
+        <span style="color:#94a3b8; font-size:14px; font-weight:bold;">SHARDS</span>
       </div>
       
       <!-- Tabs -->
-      <div style="display:flex; gap:10px; margin-bottom:30px;">
-        <button id="locker-tab-suits" onclick="switchLockerTab('suits')" style="padding:10px 25px; border-radius:20px; border:2px solid #a855f7; background:rgba(168,85,247,0.2); color:#a855f7; font-weight:bold; cursor:pointer; font-size:15px;">Hero Suits</button>
-        <button id="locker-tab-villains" onclick="switchLockerTab('villains')" style="padding:10px 25px; border-radius:20px; border:2px solid #64748b; background:transparent; color:#64748b; font-weight:bold; cursor:pointer; font-size:15px;">Villain Skins</button>
+      <div style="display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap; justify-content:center;">
+        <button id="locker-tab-suits" onclick="switchLockerTab('suits')" style="padding:10px 20px; border-radius:20px; border:2px solid #a855f7; background:rgba(168,85,247,0.2); color:#a855f7; font-weight:bold; cursor:pointer; font-size:13px;">🦸 Hero Suits</button>
+        <button id="locker-tab-villains" onclick="switchLockerTab('villains')" style="padding:10px 20px; border-radius:20px; border:2px solid #64748b; background:transparent; color:#64748b; font-weight:bold; cursor:pointer; font-size:13px;">😈 Villain Skins</button>
+        <button id="locker-tab-wallpapers" onclick="switchLockerTab('wallpapers')" style="padding:10px 20px; border-radius:20px; border:2px solid #64748b; background:transparent; color:#64748b; font-weight:bold; cursor:pointer; font-size:13px;">🖼️ Wallpapers</button>
+        <button id="locker-tab-effects" onclick="switchLockerTab('effects')" style="padding:10px 20px; border-radius:20px; border:2px solid #64748b; background:transparent; color:#64748b; font-weight:bold; cursor:pointer; font-size:13px;">✨ Trails</button>
+        <button id="locker-tab-family" onclick="switchLockerTab('family')" style="padding:10px 20px; border-radius:20px; border:2px solid #64748b; background:transparent; color:#64748b; font-weight:bold; cursor:pointer; font-size:13px;">👨‍👧 Family</button>
       </div>
       
-      <!-- Suit Grid -->
+      <!-- Store Grid -->
       <div id="locker-grid" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center; max-width:1000px;"></div>
+
+      <!-- Currency Explainer -->
+      <div style="margin-top:30px; max-width:600px; text-align:center;">
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+          <div style="background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.2); border-radius:14px; padding:14px 20px; flex:1; min-width:200px;">
+            <div style="font-size:18px; margin-bottom:4px;">✦</div>
+            <div style="color:#a855f7; font-size:14px; font-weight:900;">LUMES</div>
+            <div style="color:#64748b; font-size:11px; font-weight:600; margin-top:4px;">Store currency. Earn from completing levels, daily challenges, and boss fights. Spend on suits, wallpapers, trails, and family goodies.</div>
+          </div>
+          <div style="background:rgba(34,211,238,0.06); border:1px solid rgba(34,211,238,0.2); border-radius:14px; padding:14px 20px; flex:1; min-width:200px;">
+            <div style="font-size:18px; margin-bottom:4px;">💎</div>
+            <div style="color:#22d3ee; font-size:14px; font-weight:900;">SHARDS</div>
+            <div style="color:#64748b; font-size:11px; font-weight:600; margin-top:4px;">Power currency. Collect during gameplay to unlock Rift Powers — special abilities like shields, time slow, and energy blasts.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2144,7 +2186,7 @@
             <div class="stat-value" id="hub-stat-shards">0</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Echoes</div>
+            <div class="stat-label">Lumes</div>
             <div class="stat-value" id="hub-stat-echoes" style="color: #a855f7;">0</div>
           </div>
         </div>
@@ -2611,27 +2653,30 @@
 
     window.showVaultDefender = function() {
       document.getElementById('aiden-portal').style.display = 'none';
+      document.getElementById('play-mode-hub').style.display = 'none';
       document.getElementById('vault-defender').style.display = 'block';
       
       // Initialize VaultDefender Phaser game if not already running
-      if (!window.vaultGame) {
-        window.vaultGame = new Phaser.Game({
-          type: Phaser.AUTO,
-          parent: 'vault-defender',
-          transparent: true,
-          scale: {
-            mode: Phaser.Scale.RESIZE,
-            autoCenter: Phaser.Scale.CENTER_BOTH,
-            width: '100%',
-            height: '100%'
-          },
-          scene: [window.VaultDefender],
-          physics: {
-            default: 'arcade',
-            arcade: { gravity: { y: 0 }, debug: false }
-          }
-        });
+      if (window.vaultGame) {
+        window.vaultGame.destroy(true);
+        window.vaultGame = null;
       }
+      window.vaultGame = new Phaser.Game({
+        type: Phaser.AUTO,
+        parent: 'vault-defender',
+        transparent: true,
+        scale: {
+          mode: Phaser.Scale.RESIZE,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
+          width: '100%',
+          height: '100%'
+        },
+        scene: [window.VaultDefender],
+        physics: {
+          default: 'arcade',
+          arcade: { gravity: { y: 0 }, debug: false }
+        }
+      });
     };
 
 
@@ -2700,8 +2745,22 @@
       // Return to menu music
       MusicSystem.play('menu');
       
-      document.getElementById('game-hub').style.display = 'none';
-      document.getElementById('game-hub').style.opacity = '0';
+      // Hide ALL game/activity layers
+      var layersToHide = ['game-hub', 'game-container', 'game-container-invaders', 'game-container-match', 'play-mode-hub', 'learning-center', 'lume-sandbox', 'vault-defender'];
+      layersToHide.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) { el.style.display = 'none'; el.style.opacity = '0'; }
+      });
+      
+      // Destroy mini-game Phaser instances to free memory
+      if (window.riftInvadersGame) { window.riftInvadersGame.destroy(true); window.riftInvadersGame = null; }
+      if (window.chronoMatchGame) { window.chronoMatchGame.destroy(true); window.chronoMatchGame = null; }
+      if (window.vaultGame) { window.vaultGame.destroy(true); window.vaultGame = null; }
+      
+      // Remove any open module overlays (Learning Academy)
+      ['mod-timemath','mod-scilab','mod-storymode','mod-history','mod-artstudio','mod-musiclab','mod-chronotyper'].forEach(function(id) {
+        var el = document.getElementById(id); if (el) el.remove();
+      });
       
       const portal = document.getElementById('aiden-portal');
       portal.style.display = 'block';
@@ -2767,32 +2826,71 @@
       brute: { name: 'Symbiote Brute', title: 'Alien Glob', img: 'assets/ui/alien_brute_portrait.png', color: '#94a3b8', sprite: 'alien_brute', s1:['Speed', 90], s2:['Power', 100], s3:['Venom', 95] }
     };
 
-    // ── Suit Data (what you PLAY as) ──
+    // ── Suit Data (what you PLAY as) + Store Items ──
     const SUIT_DATA = {
+      // ── HERO SUITS (category: suits) ──
       // Free base suits
-      iron_kid:         { name: 'Ironboy',       img: 'assets/ui/hero_aiden_portrait.png',       color: '#fbbf24', cost: 0, category: 'suits' },
-      super_girl:       { name: 'Supergirl',     img: 'assets/ui/hero_maya_portrait.png',        color: '#10b981', cost: 0, category: 'suits' },
-      superboy:         { name: 'Superboy',      img: 'assets/ui/hero_superboy_portrait.png',    color: '#2563eb', cost: 0, category: 'suits' },
-      cyborg_girl:      { name: 'Cyborg Girl',   img: 'assets/ui/hero_cyborg_girl_portrait.png', color: '#06b6d4', cost: 0, category: 'suits' },
+      iron_kid:         { name: 'Ironboy',       img: 'assets/ui/hero_aiden_portrait.png',       color: '#fbbf24', cost: 0, category: 'suits', type: 'suit' },
+      super_girl:       { name: 'Supergirl',     img: 'assets/ui/hero_maya_portrait.png',        color: '#10b981', cost: 0, category: 'suits', type: 'suit' },
+      superboy:         { name: 'Superboy',      img: 'assets/ui/hero_superboy_portrait.png',    color: '#2563eb', cost: 0, category: 'suits', type: 'suit' },
+      cyborg_girl:      { name: 'Cyborg Girl',   img: 'assets/ui/hero_cyborg_girl_portrait.png', color: '#06b6d4', cost: 0, category: 'suits', type: 'suit' },
       // Unlockable suits
-      hero_red:         { name: 'Spider Hero',   img: 'assets/ui/hero_leo_portrait.png',         color: '#e63946', cost: 10, category: 'suits' },
-      telekinetic_girl: { name: 'Telekinetic',   img: 'assets/ui/hero_zara_portrait.png',        color: '#a855f7', cost: 10, category: 'suits' },
-      jedi_kid:         { name: 'Jedi Kid',      img: 'assets/ui/hero_leo_portrait.png',         color: '#22c55e', cost: 15, category: 'suits' },
-      hero_black:       { name: 'Shadow Suit',   img: 'assets/ui/hero_aiden_portrait.png',       color: '#475569', cost: 20, category: 'suits' },
-      // Villain skins
-      enemy_thug:       { name: 'Syndicate Thug',    img: 'assets/ui/enemy_thug_portrait.png',    color: '#dc2626', cost: 30, category: 'villains' },
-      enemy_trooper:    { name: 'Imperial Trooper',  img: 'assets/ui/enemy_trooper_portrait.png', color: '#ffffff', cost: 35, category: 'villains' },
-      alien_brute:      { name: 'Symbiote Brute',    img: 'assets/ui/alien_brute_portrait.png',   color: '#94a3b8', cost: 50, category: 'villains' }
+      hero_red:         { name: 'Spider Hero',   img: 'assets/ui/hero_leo_portrait.png',         color: '#e63946', cost: 10, category: 'suits', type: 'suit' },
+      telekinetic_girl: { name: 'Telekinetic',   img: 'assets/ui/hero_zara_portrait.png',        color: '#a855f7', cost: 10, category: 'suits', type: 'suit' },
+      jedi_kid:         { name: 'Jedi Kid',      img: 'assets/ui/hero_leo_portrait.png',         color: '#22c55e', cost: 15, category: 'suits', type: 'suit' },
+      hero_black:       { name: 'Shadow Suit',   img: 'assets/ui/hero_aiden_portrait.png',       color: '#475569', cost: 20, category: 'suits', type: 'suit' },
+
+      // ── VILLAIN SKINS (category: villains) ──
+      enemy_thug:       { name: 'Syndicate Thug',    img: 'assets/ui/enemy_thug_portrait.png',    color: '#dc2626', cost: 30, category: 'villains', type: 'suit' },
+      enemy_trooper:    { name: 'Imperial Trooper',  img: 'assets/ui/enemy_trooper_portrait.png', color: '#ffffff', cost: 35, category: 'villains', type: 'suit' },
+      alien_brute:      { name: 'Symbiote Brute',    img: 'assets/ui/alien_brute_portrait.png',   color: '#94a3b8', cost: 50, category: 'villains', type: 'suit' },
+
+      // ── WALLPAPERS (category: wallpapers) ── cosmetic portal backgrounds
+      wp_nebula:        { name: 'Nebula Drift',      emoji: '🌌', color: '#7c3aed', cost: 5,  category: 'wallpapers', type: 'wallpaper', desc: 'Purple space nebula for your portal' },
+      wp_ocean:         { name: 'Deep Ocean',        emoji: '🌊', color: '#0ea5e9', cost: 5,  category: 'wallpapers', type: 'wallpaper', desc: 'Calm underwater world' },
+      wp_lava:          { name: 'Lava Fields',       emoji: '🌋', color: '#ef4444', cost: 8,  category: 'wallpapers', type: 'wallpaper', desc: 'Glowing volcanic landscape' },
+      wp_forest:        { name: 'Enchanted Forest',  emoji: '🌿', color: '#10b981', cost: 8,  category: 'wallpapers', type: 'wallpaper', desc: 'Magical glowing trees' },
+      wp_arctic:        { name: 'Arctic Aurora',     emoji: '❄️', color: '#22d3ee', cost: 10, category: 'wallpapers', type: 'wallpaper', desc: 'Northern lights over ice' },
+      wp_sunset:        { name: 'Cyber Sunset',      emoji: '🌅', color: '#f97316', cost: 10, category: 'wallpapers', type: 'wallpaper', desc: 'Neon city skyline at dusk' },
+      wp_galaxy:        { name: 'Galaxy Core',       emoji: '✨', color: '#ec4899', cost: 15, category: 'wallpapers', type: 'wallpaper', desc: 'Center of the Milky Way' },
+      wp_rainbow:       { name: 'Rainbow Realm',     emoji: '🌈', color: '#fbbf24', cost: 15, category: 'wallpapers', type: 'wallpaper', desc: 'A world of pure color' },
+
+      // ── TRAIL EFFECTS (category: effects) ── visual effects during gameplay
+      fx_fire:          { name: 'Fire Trail',        emoji: '🔥', color: '#ef4444', cost: 12, category: 'effects', type: 'trail', desc: 'Leave a blazing trail behind you' },
+      fx_ice:           { name: 'Ice Trail',         emoji: '🧊', color: '#22d3ee', cost: 12, category: 'effects', type: 'trail', desc: 'Frozen crystal particles' },
+      fx_rainbow:       { name: 'Rainbow Trail',     emoji: '🌈', color: '#fbbf24', cost: 15, category: 'effects', type: 'trail', desc: 'Multicolor sparkle trail' },
+      fx_lightning:     { name: 'Lightning Aura',    emoji: '⚡', color: '#a855f7', cost: 18, category: 'effects', type: 'trail', desc: 'Electric sparks follow you' },
+      fx_hearts:        { name: 'Heart Trail',       emoji: '💕', color: '#ec4899', cost: 10, category: 'effects', type: 'trail', desc: 'Cute floating hearts' },
+      fx_stars:         { name: 'Star Burst',        emoji: '⭐', color: '#fbbf24', cost: 10, category: 'effects', type: 'trail', desc: 'Twinkling star particles' },
+      fx_shadow:        { name: 'Shadow Ghost',      emoji: '👻', color: '#475569', cost: 20, category: 'effects', type: 'trail', desc: 'Dark afterimage effect' },
+      fx_pixel:         { name: 'Pixel Pop',         emoji: '🟩', color: '#10b981', cost: 8,  category: 'effects', type: 'trail', desc: 'Retro pixel particles' },
+
+      // ── FAMILY GOODIES (category: family) ── things parents and kids share
+      fam_certificate:  { name: 'Custom Certificate',  emoji: '📜', color: '#fbbf24', cost: 5,  category: 'family', type: 'family', desc: 'Print a personalized achievement certificate' },
+      fam_avatar_frame: { name: 'Gold Avatar Frame',   emoji: '🖼️', color: '#fbbf24', cost: 8,  category: 'family', type: 'family', desc: 'Shiny gold border for your avatar' },
+      fam_name_sparkle: { name: 'Sparkle Name',        emoji: '✨', color: '#ec4899', cost: 10, category: 'family', type: 'family', desc: 'Animated sparkles on your portal name' },
+      fam_portal_music: { name: 'Portal Music: Chill',  emoji: '🎵', color: '#a855f7', cost: 12, category: 'family', type: 'family', desc: 'Relaxing ambient music for your portal' },
+      fam_portal_music2:{ name: 'Portal Music: Epic',   emoji: '🎶', color: '#ef4444', cost: 12, category: 'family', type: 'family', desc: 'Epic orchestral portal soundtrack' },
+      fam_emoji_pack:   { name: 'Emoji Reaction Pack',  emoji: '😎', color: '#10b981', cost: 6,  category: 'family', type: 'family', desc: 'Extra emoji reactions for friends' },
+      fam_greeting:     { name: 'Animated Greeting',    emoji: '👋', color: '#22d3ee', cost: 8,  category: 'family', type: 'family', desc: 'Animated welcome banner on your portal' },
+      fam_family_badge: { name: 'Family Badge',         emoji: '🏠', color: '#f97316', cost: 15, category: 'family', type: 'family', desc: 'Special badge visible to friends & family' }
     };
 
     let currentlyViewingHero = null;
     let foilAnimation = null;
 
-    // ── Lume Balance Helpers ──
+    // ── Balance Helpers ──
     function getLumes() {
       try {
         const raw = window.localStore.getItem(SaveSystem.getKey());
         if (raw) return JSON.parse(raw).lumes || 0;
+      } catch(e) {}
+      return 0;
+    }
+    function getShards() {
+      try {
+        const raw = window.localStore.getItem(SaveSystem.getKey());
+        if (raw) return JSON.parse(raw).shards || 0;
       } catch(e) {}
       return 0;
     }
@@ -2811,10 +2909,17 @@
     }
     function updateLumeDisplays() {
       const lumes = getLumes();
+      const shards = getShards();
+      // Portal header
       const portalEl = document.getElementById('portal-lume-balance');
-      const lockerEl = document.getElementById('locker-lume-balance');
+      const portalShardEl = document.getElementById('portal-shard-balance');
       if (portalEl) portalEl.innerText = lumes;
+      if (portalShardEl) portalShardEl.innerText = shards;
+      // Locker header
+      const lockerEl = document.getElementById('locker-lume-balance');
+      const lockerShardEl = document.getElementById('locker-shard-balance');
       if (lockerEl) lockerEl.innerText = lumes;
+      if (lockerShardEl) lockerShardEl.innerText = shards;
     }
 
     // ── Rift Locker ──
@@ -2827,12 +2932,15 @@
     };
     window.switchLockerTab = function(tab) {
       activeLockerTab = tab;
-      document.getElementById('locker-tab-suits').style.background = tab === 'suits' ? 'rgba(168,85,247,0.2)' : 'transparent';
-      document.getElementById('locker-tab-suits').style.borderColor = tab === 'suits' ? '#a855f7' : '#64748b';
-      document.getElementById('locker-tab-suits').style.color = tab === 'suits' ? '#a855f7' : '#64748b';
-      document.getElementById('locker-tab-villains').style.background = tab === 'villains' ? 'rgba(168,85,247,0.2)' : 'transparent';
-      document.getElementById('locker-tab-villains').style.borderColor = tab === 'villains' ? '#a855f7' : '#64748b';
-      document.getElementById('locker-tab-villains').style.color = tab === 'villains' ? '#a855f7' : '#64748b';
+      const tabs = ['suits', 'villains', 'wallpapers', 'effects', 'family'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('locker-tab-' + t);
+        if (btn) {
+          btn.style.background = tab === t ? 'rgba(168,85,247,0.2)' : 'transparent';
+          btn.style.borderColor = tab === t ? '#a855f7' : '#64748b';
+          btn.style.color = tab === t ? '#a855f7' : '#64748b';
+        }
+      });
       renderLockerGrid();
     };
     function renderLockerGrid() {
@@ -2841,45 +2949,68 @@
       const lumes = getLumes();
       const activeSuit = window.localStore.getItem('ChronoverseActiveHero') || 'iron_kid';
       
-      Object.entries(SUIT_DATA).forEach(([key, suit]) => {
-        if (suit.category !== activeLockerTab) return;
+      Object.entries(SUIT_DATA).forEach(([key, item]) => {
+        if (item.category !== activeLockerTab) return;
         const unlocked = isSuitUnlocked(key);
-        const isActive = activeSuit === key;
-        const canAfford = lumes >= suit.cost;
+        const isActive = (item.type === 'suit') ? (activeSuit === key) : false;
+        const canAfford = lumes >= item.cost;
         
         const card = document.createElement('div');
-        card.style.cssText = `width:200px; background:rgba(255,255,255,0.03); border:2px solid ${isActive ? suit.color : unlocked ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)'}; border-radius:20px; overflow:hidden; cursor:${unlocked ? 'pointer' : canAfford ? 'pointer' : 'not-allowed'}; transition:all 0.3s; opacity:${unlocked || canAfford ? '1' : '0.5'}; position:relative;`;
+        card.style.cssText = `width:200px; background:rgba(255,255,255,0.03); border:2px solid ${isActive ? item.color : unlocked ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.05)'}; border-radius:20px; overflow:hidden; cursor:${unlocked ? 'pointer' : canAfford ? 'pointer' : 'not-allowed'}; transition:all 0.3s; opacity:${unlocked || canAfford ? '1' : '0.5'}; position:relative;`;
         
         let badge = '';
         if (isActive) {
-          badge = `<div style="position:absolute; top:10px; right:10px; background:${suit.color}; color:#000; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:900; z-index:2;">EQUIPPED</div>`;
+          badge = `<div style="position:absolute; top:10px; right:10px; background:${item.color}; color:#000; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:900; z-index:2;">EQUIPPED</div>`;
+        } else if (unlocked && item.type !== 'suit') {
+          badge = `<div style="position:absolute; top:10px; right:10px; background:#10b981; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:900; z-index:2;">OWNED ✓</div>`;
         } else if (!unlocked) {
-          badge = `<div style="position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.7); color:#fbbf24; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:900; z-index:2;">✦ ${suit.cost}</div>`;
+          badge = `<div style="position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.7); color:#fbbf24; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:900; z-index:2;">✦ ${item.cost}</div>`;
         }
+        
+        // Suit items use portrait images, other items use emoji thumbnails
+        let thumbHtml;
+        if (item.img) {
+          thumbHtml = `<img src="${item.img}" alt="${item.name}" style="width:100%; height:200px; object-fit:cover; mix-blend-mode:screen;" />`;
+        } else {
+          thumbHtml = `<div style="width:100%; height:200px; background:linear-gradient(135deg, ${item.color}15, ${item.color}08); display:flex; align-items:center; justify-content:center; font-size:72px; position:relative; overflow:hidden;">
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 80%, ${item.color}30, transparent 60%);"></div>
+            ${item.emoji || '🎁'}
+          </div>`;
+        }
+        
+        // Description line
+        const descText = item.desc || '';
+        const statusText = unlocked 
+          ? (isActive ? 'Currently Equipped' : (item.type === 'suit' ? 'Tap to Equip' : 'Owned')) 
+          : (canAfford ? 'Tap to Unlock' : `Need ${item.cost - lumes} more ✦`);
         
         card.innerHTML = `
           ${badge}
-          <img src="${suit.img}" alt="${suit.name}" style="width:100%; height:250px; object-fit:cover; mix-blend-mode:screen;" />
-          <div style="padding:12px; text-align:center;">
-            <div style="color:${suit.color}; font-size:18px; font-weight:900;">${suit.name}</div>
-            <div style="color:#64748b; font-size:12px; margin-top:4px;">${unlocked ? (isActive ? 'Currently Equipped' : 'Tap to Equip') : (canAfford ? 'Tap to Unlock' : `Need ${suit.cost - lumes} more ✦`)}</div>
+          ${thumbHtml}
+          <div style="padding:14px; text-align:center;">
+            <div style="color:${item.color}; font-size:16px; font-weight:900; margin-bottom:4px;">${item.name}</div>
+            ${descText ? `<div style="color:#94a3b8; font-size:11px; margin-bottom:6px; line-height:1.4;">${descText}</div>` : ''}
+            <div style="color:#64748b; font-size:11px; font-weight:700;">${statusText}</div>
           </div>`;
         
-        if (unlocked && !isActive) {
+        // Click handlers
+        if (item.type === 'suit' && unlocked && !isActive) {
           card.onclick = () => {
             window.localStore.setItem('ChronoverseActiveHero', key);
             renderLockerGrid();
           };
         } else if (!unlocked && canAfford) {
           card.onclick = () => {
-            if (confirm(`Unlock ${suit.name} for ✦ ${suit.cost} Lumes?`)) {
+            if (confirm(`Unlock ${item.name} for ✦ ${item.cost} Lumes?`)) {
               const raw = window.localStore.getItem(SaveSystem.getKey());
               const save = raw ? JSON.parse(raw) : {};
-              save.lumes = (save.lumes || 0) - suit.cost;
+              save.lumes = (save.lumes || 0) - item.cost;
               if (!save.unlockedSuits) save.unlockedSuits = [];
               save.unlockedSuits.push(key);
               window.localStore.setItem(SaveSystem.getKey(), JSON.stringify(save));
-              window.localStore.setItem('ChronoverseActiveHero', key);
+              if (item.type === 'suit') {
+                window.localStore.setItem('ChronoverseActiveHero', key);
+              }
               updateLumeDisplays();
               renderLockerGrid();
             }
@@ -2959,21 +3090,33 @@
       const save = raw ? JSON.parse(raw) : {};
       const powers = save.riftPowers || [];
       const selected = save.selectedRiftPower || null;
+      const totalShards = save.shards || save.totalShards || 0;
       
       const powerInfo = {
-        shield: { icon: '🛡️', name: 'Rift Shield', desc: '5 seconds of invincibility', cost: 10 },
-        timeFracture: { icon: '⏳', name: 'Time Fracture', desc: '6 seconds of slow motion', cost: 20 },
-        dimensionalBlast: { icon: '⚡', name: 'Dimensional Blast', desc: 'Destroy all enemies on screen', cost: 30 }
+        shield:           { icon: '🛡️', name: 'Rift Shield',        desc: '5 seconds of invincibility',       cost: 10 },
+        timeFracture:     { icon: '⏳', name: 'Time Fracture',      desc: '6 seconds of slow motion',         cost: 20 },
+        dimensionalBlast: { icon: '⚡', name: 'Dimensional Blast',  desc: 'Destroy all enemies on screen',    cost: 30 },
+        magnetPull:       { icon: '🧲', name: 'Magnet Pull',        desc: 'Auto-collect nearby shards',       cost: 15 },
+        doubleJump:       { icon: '🦘', name: 'Double Jump',        desc: 'Jump again mid-air in Rift Runner', cost: 25 }
       };
       
-      const allPowers = ['shield', 'timeFracture', 'dimensionalBlast'];
+      const allPowers = Object.keys(powerInfo);
       allPowers.forEach(key => {
         const info = powerInfo[key];
         const unlocked = powers.includes(key);
         const isSelected = selected === key;
+        const canAfford = totalShards >= info.cost;
         const div = document.createElement('div');
-        div.style.cssText = `background: ${isSelected ? '#7c3aed' : unlocked ? '#1e1b4b' : '#111'}; border: 2px solid ${isSelected ? '#c084fc' : unlocked ? '#6366f1' : '#333'}; border-radius: 12px; padding: 10px; cursor: ${unlocked ? 'pointer' : 'default'}; opacity: ${unlocked ? '1' : '0.4'};`;
-        div.innerHTML = `<div style="font-size:20px; display:inline;">${info.icon}</div> <span style="font-family:'Arial Black'; font-size:14px; color:#fff;">${info.name}</span><br><span style="font-size:11px; color:#aaa;">${unlocked ? info.desc : `Collect ${info.cost} Echoes to unlock`}</span>${isSelected ? '<span style="float:right; color:#fbbf24; font-size:12px; font-weight:900;">EQUIPPED ✓</span>' : ''}`;
+        div.style.cssText = `background: ${isSelected ? '#7c3aed' : unlocked ? '#1e1b4b' : '#111'}; border: 2px solid ${isSelected ? '#c084fc' : unlocked ? '#6366f1' : '#333'}; border-radius: 12px; padding: 12px; cursor: ${unlocked || canAfford ? 'pointer' : 'default'}; opacity: ${unlocked || canAfford ? '1' : '0.4'}; display:flex; align-items:center; gap:10px;`;
+        div.innerHTML = `
+          <div style="font-size:28px; flex-shrink:0;">${info.icon}</div>
+          <div style="flex:1;">
+            <span style="font-family:'Arial Black'; font-size:14px; color:#fff;">${info.name}</span><br>
+            <span style="font-size:11px; color:#aaa;">${unlocked ? info.desc : `💎 ${info.cost} Shards to unlock`}</span>
+          </div>
+          ${isSelected ? '<span style="color:#fbbf24; font-size:12px; font-weight:900;">EQUIPPED ✓</span>' : ''}
+          ${!unlocked && canAfford ? '<span style="color:#22d3ee; font-size:11px; font-weight:900;">TAP TO UNLOCK</span>' : ''}`;
+        
         if (unlocked && !isSelected) {
           div.onclick = () => {
             save.selectedRiftPower = key;
@@ -2986,12 +3129,32 @@
             window.localStore.setItem(SaveSystem.getKey(), JSON.stringify(save));
             showRiftPowerSelector(); // refresh
           };
+        } else if (!unlocked && canAfford) {
+          div.onclick = () => {
+            if (confirm(`Unlock ${info.name} for 💎 ${info.cost} Shards?`)) {
+              save.shards = (save.shards || 0) - info.cost;
+              if (!save.riftPowers) save.riftPowers = [];
+              save.riftPowers.push(key);
+              window.localStore.setItem(SaveSystem.getKey(), JSON.stringify(save));
+              updateLumeDisplays();
+              showRiftPowerSelector();
+            }
+          };
         }
         list.appendChild(div);
       });
       
-      if (powers.length === 0) {
-        list.innerHTML = '<div style="color:#666; font-size:13px; padding:10px;">Collect Echoes 🔮 during levels to unlock Rift Powers! First power unlocks at 10 Echoes.</div>';
+      // Shard balance in modal
+      const balDiv = document.createElement('div');
+      balDiv.style.cssText = 'text-align:center; margin-top:10px; padding:10px; background:rgba(34,211,238,0.06); border:1px solid rgba(34,211,238,0.15); border-radius:10px;';
+      balDiv.innerHTML = `<span style="font-size:16px;">💎</span> <span style="color:#22d3ee; font-weight:900; font-size:16px;">${totalShards}</span> <span style="color:#64748b; font-size:12px; font-weight:700;">SHARDS available</span>`;
+      list.appendChild(balDiv);
+      
+      if (powers.length === 0 && totalShards < 10) {
+        const hint = document.createElement('div');
+        hint.style.cssText = 'color:#666; font-size:12px; padding:10px; text-align:center; margin-top:8px;';
+        hint.innerHTML = 'Collect 💎 Shards during Rift Invaders and Vault Defender to unlock powers!';
+        list.appendChild(hint);
       }
     };
 
