@@ -1,6 +1,6 @@
 {
   "name": "chronoverse",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "The Chronoverse - Educational Superhero Portal",
   "main": "main.js",
   "scripts": {
