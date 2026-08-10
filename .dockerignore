@@ -1,0 +1,12 @@
+node_modules
+.git
+android
+dist_android
+*.exe
+*.apk
+*.dmg
+electron-builder.yml
+capacitor.config.ts
+build_android.js
+main.js
+preload.js
